@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 
 export default function RandomUserPage() {
   //user = null or array of object
-  const [isFirstLoad, setIsFistload] = useState(true);
   const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [genAmount, setGenAmount] = useState(1);
+  const [isReLoad, setIsReload] = useState(true);
 
   useEffect(() => {
-    if (isFirstLoad) {
-      setIsFistload(false);
+    if (isReLoad) {
+      setIsReload(false);
       return;
     }
     localStorage.setItem("amount", genAmount);
@@ -32,7 +32,7 @@ export default function RandomUserPage() {
     );
     setIsLoading(false);
     const users = resp.data.results;
-    const cleanedUser = users.map((person) => cleanUser(person));
+    const cleanedUser = users.map((persons) => cleanUser(persons));
     setUsers(cleanedUser);
   };
 
